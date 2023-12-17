@@ -30,4 +30,20 @@ print(documentation_link.text)
 bug_link = driver.find_element(by=By.XPATH, value='//*[@id="site-map"]/div[2]/div/ul/li[3]/a')
 print(bug_link.text)
 
+# get the upcoming events
+# dates = driver.find_elements(by=By.XPATH, value='//*[@id="content"]/div/section/div[3]/div[2]/div/ul/li/time')
+event_times = driver.find_elements(by=By.CSS_SELECTOR, value=".event-widget time")
+
+# events = driver.find_elements(by=By.XPATH, value='//*[@id="content"]/div/section/div[3]/div[2]/div/ul/li/a')
+events_names = driver.find_elements(by=By.CSS_SELECTOR, value=".event-widget li a")
+
+events = {}
+
+for n in range(len(event_times)):
+    events[n] = {
+        "time": event_times[n].text,
+        "name": events_names[n].text
+    }
+
+print(events)
 driver.close()
